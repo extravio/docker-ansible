@@ -1,0 +1,40 @@
+version: "3"
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/mikael/dev/mysql2:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - debian-dev-network
+  php72:
+    container_name: php72
+    image: php72-dev
+    ports:
+      - "80:80"
+    volumes:
+       - /home/mikael/dev/cd/docker-ansible/ss4:/var/www/html
+       - /home/mikael/dev/cd/docker-ansible/docker/dev/apache2/sites-enabled:/etc/apache2/sites-enabled
+       - /home/mikael/dev/cd/docker-ansible/docker/dev/apache2/php/ss4.ini:/usr/local/etc/php/conf.d/ss4.ini
+    networks:
+      - debian-dev-network 
+    environment:
+      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+  # solr4:
+  #   container_name: solr4
+  #   image: makuk66/docker-solr:4.10.3
+  #   ports:
+  #     - "8983:8983"
+  #   volumes:
+  #      - /home/mikael/dev/cd/docker-ansible/ss4/.solr:/var/www/html/.solr
+  #   networks:
+  #     - debian-dev-network
+networks:
+  debian-dev-network:
+    driver: bridge
+

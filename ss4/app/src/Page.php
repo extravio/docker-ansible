@@ -9,5 +9,10 @@ namespace {
         private static $db = [];
 
         private static $has_one = [];
+
+        public static function MyMethod()
+        {
+            return (1 + 1);
+        }
     }
 }
