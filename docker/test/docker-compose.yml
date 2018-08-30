@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/mikael/dev/mysql2:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - debian-dev-network
+  ss4test:
+    build: 
+      context: ../..
+      dockerfile: ./docker/test/Dockerfile
+    image: ss4test
+    ports:
+      - "80:80"
+    # volumes:
+    #    - cache
+    networks:
+      - debian-dev-network 
+    depends_on:
+      - mariadb
+networks:
+  debian-dev-network:
+    driver: bridge
+
