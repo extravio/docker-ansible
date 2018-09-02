@@ -29,4 +29,4 @@ Create volume container
 
 > docker-compose kill
 
-> docker-composer rm -f
+> docker-compose rm -f
