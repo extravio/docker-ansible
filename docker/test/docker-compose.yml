@@ -23,6 +23,18 @@ services:
     depends_on:
       - mariadb
     command: ["/var/www/html/wait-for-it.sh", "mariadb:3306", "--", "./vendor/bin/phpunit", "app/tests", "flush=all"]
+  ss4builder:
+    build: 
+      context: ../..
+      dockerfile: ./docker/test/Dockerfile
+    image: ss4test
+    volumes:
+      - ../../project:/var/www
+    networks:
+      - debian-dev-network 
+    depends_on:
+      - mariadb
+    command: ["/var/www/html/wait-for-it.sh", "mariadb:3306", "--", "./vendor/bin/phpunit", "app/tests", "flush=all"]
 networks:
   debian-dev-network:
     driver: bridge

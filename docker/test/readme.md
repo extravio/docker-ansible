@@ -5,6 +5,10 @@
 
 > docker run --rm -i -t ss4test
 
+Force docker-compose to rebuild any images that are configured to be built.
+
+> docker-compose build
+
 > docker-compose up ss4test
 
 depends_on doesn't wait until the mariadb container is "ready"
@@ -19,3 +23,10 @@ https://docs.docker.com/compose/startup-order/
 Create volume container
 
 > docker run -v /tmp/cache:/cache --entrypoint true --name composer ss4test
+
+
+# clean up
+
+> docker-compose kill
+
+> docker-composer rm -f
