@@ -16,6 +16,7 @@ RUN apt-get update -y && apt-get install -y \
         curl \
         git-core \
         gzip \
+        unzip \
         libcurl4-openssl-dev \
         libgd-dev \
         libjpeg-dev \

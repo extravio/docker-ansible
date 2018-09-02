@@ -12,3 +12,10 @@ depends_on doesn't wait until the mariadb container is "ready"
 for a more robust solution, add a wrapper script as described here:
 
 https://docs.docker.com/compose/startup-order/
+
+
+# caching
+
+Create volume container
+
+> docker run -v /tmp/cache:/cache --entrypoint true --name composer ss4test
