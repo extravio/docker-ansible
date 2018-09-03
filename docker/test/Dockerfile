@@ -15,3 +15,5 @@ COPY ss4 /var/www/html
 RUN composer install
 
 COPY ./docker/test/test.env .env
+
+LABEL application=ss4

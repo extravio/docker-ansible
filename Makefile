@@ -1,4 +1,6 @@
 PROJECT_NAME ?= ss4
+ORG_NAME ?= mm
+REPO_NAME ?= ss4
 
 # Filenames
 TEST_COMPOSE_FILE := docker/test/docker-compose.yml
@@ -19,3 +21,4 @@ build:
 clean:
 	docker-compose -f $(TEST_COMPOSE_FILE) kill
 	docker-compose -f $(TEST_COMPOSE_FILE) rm -f
+	docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
