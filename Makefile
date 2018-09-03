@@ -19,6 +19,18 @@ build:
 	docker build -t ss4prod -f ./docker/prod/Dockerfile .
 	
 clean:
-	docker-compose -f $(TEST_COMPOSE_FILE) kill
-	docker-compose -f $(TEST_COMPOSE_FILE) rm -f
-	docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
+	${INFO} "Destroying development environment..."
+	@ docker-compose -f $(TEST_COMPOSE_FILE) kill
+	@ docker-compose -f $(TEST_COMPOSE_FILE) rm -f -v
+	@ docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
+	${INFO} "Clean complete"
+
+# Cosmetics
+YELLOW := "\e[1;33m"
+NC := "\e[0m"
+
+# Shell Functions
+INFO := @bash -c '\
+	printf $(YELLOW); \
+	echo "=> $$1"; \
+	printf $(NC)' VALUE
