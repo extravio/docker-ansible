@@ -36,3 +36,14 @@ Create volume container
 > docker cp $$(docker-compose -p $(DEV_PROJECT) -f (DEV_COMPOSE_FILE) ps -q builder):/wheelhouse/. target
 
 > docker-compose rm -f
+
+# handling errors
+
+> docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) up ss4test
+
+Always exists with code 0 even if a test fails. Use run -rm:
+
+> docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) run -rm ss4test
+
+However, we still need to copy the files (coverage report) which we cannot do with docker-compose run -rm
+because the container is automatically deleted. (We have to use the rm flag because docker-compose kill / rm don't recognise containers started with run)
