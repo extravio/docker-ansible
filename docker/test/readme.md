@@ -30,3 +30,9 @@ Create volume container
 > docker-compose kill
 
 > docker-compose rm -f
+
+# copy from docker to host
+
+> docker cp $$(docker-compose -p $(DEV_PROJECT) -f (DEV_COMPOSE_FILE) ps -q builder):/wheelhouse/. target
+
+> docker-compose rm -f

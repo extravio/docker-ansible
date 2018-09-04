@@ -13,6 +13,7 @@ TEST_PROJECT := $(PROJECT_NAME)$(BUILD_ID)
 test:
 	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) build
 	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) up ss4test
+	docker cp $$(docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) ps -q ss4test):/tmp/coverage.xml reports/
 	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) down
 	
 build:

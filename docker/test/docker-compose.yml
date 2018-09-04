@@ -20,7 +20,7 @@ services:
       - debian-dev-network 
     depends_on:
       - mariadb
-    command: ["/var/www/html/wait-for-it.sh", "mariadb:3306", "--", "./vendor/bin/phpunit", "app/tests", "flush=all"]
+    command: ["/var/www/html/wait-for-it.sh", "mariadb:3306", "--", "./unit-tests.sh"]
 networks:
   debian-dev-network:
     driver: bridge
