@@ -19,8 +19,10 @@ CHECK := @bash -c '\
 .PHONY: test build clean
 
 test:
+	${INFO} "Pulling latest images..."
+	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) pull
 	${INFO} "Building images..."
-	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) build
+	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) build ss4test
 	${INFO} "Running tests..."
 	docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) up ss4test
 	docker cp $$(docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) ps -q ss4test):/tmp/coverage.xml reports/

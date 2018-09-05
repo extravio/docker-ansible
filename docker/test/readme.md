@@ -47,3 +47,13 @@ Always exists with code 0 even if a test fails. Use run -rm:
 
 However, we still need to copy the files (coverage report) which we cannot do with docker-compose run -rm
 because the container is automatically deleted. (We have to use the rm flag because docker-compose kill / rm don't recognise containers started with run)
+
+# image consistency
+
+docker-compose pull will pull the latest images for services based on images. 
+For services built dynamically, we would need to pull the latest image by using the 
+--pull flag with the build command.
+
+If the php72-dev had been published to Docker hub, we would need to add the following to the Makefile:
+
+docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) build --pull ss4test

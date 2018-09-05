@@ -6,6 +6,6 @@ class PageTest extends SapphireTest
 {
     public function testMyMethod()
     {
-        $this->assertEquals(3, Page::MyMethod());
+        $this->assertEquals(2, Page::MyMethod());
     }
 }
