@@ -57,3 +57,6 @@ For services built dynamically, we would need to pull the latest image by using 
 If the php72-dev had been published to Docker hub, we would need to add the following to the Makefile:
 
 docker-compose -p $(TEST_PROJECT) -f $(TEST_COMPOSE_FILE) build --pull ss4test
+
+# tag Docker image
+> make tag 0.1 latest $(git rev-parse --short HEAD)
